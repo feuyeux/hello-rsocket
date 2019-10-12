@@ -3,6 +3,7 @@
 > 
 > Add, refactor, and fix some implementations for learning and breakpoints.
 > Upgrade the blow dependencies and tools:
+
 |   | from  | to   |
 | ---- | ---- | ---- |
 |  gradle    |   4.10   |  5.6.2    |
