@@ -1,8 +1,8 @@
 # Hello RSocket
 > Fork from [https://github.com/b3rnoulli/rsocket-examples.git](https://github.com/b3rnoulli/rsocket-examples.git)
-> 
-> Add, refactor, and fix some implementations for learning and breakpoints.
-> Upgrade the blow dependencies and tools:
+
+- Add, refactor, and fix some implementations for learning and breakpoints.
+- Upgrade the blow dependencies and tools:
 
 |   | from  | to   |
 | ---- | ---- | ---- |
