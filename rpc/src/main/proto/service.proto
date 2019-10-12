@@ -1,0 +1,28 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_outer_classname = "ServiceProto";
+
+package com.rsocket.rpc;
+
+import "google/protobuf/empty.proto";
+
+
+message SingleCustomerRequest {
+    string id = 1;
+}
+
+message MultipleCustomersRequest {
+    repeated string ids = 1;
+}
+
+message CustomerResponse {
+    string id = 1;
+    string name = 2;
+}
+
+service CustomerService {
+    rpc getCustomer(SingleCustomerRequest) returns (CustomerResponse) {} //request →← response
+    rpc getCustomers(MultipleCustomersRequest) returns (stream CustomerResponse) {} //request →←← stream
+    rpc deleteCustomer(SingleCustomerRequest) returns (google.protobuf.Empty) {} //fire and forget →!
+    rpc customerChannel(stream MultipleCustomersRequest) returns (stream CustomerResponse) {} //request channel →→←→←
+}
