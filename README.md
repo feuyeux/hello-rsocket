@@ -32,3 +32,22 @@ The modules use ```gradle``` as a build tool. In order to crate executable jars 
 but executed in the particular module directory.
 
 Please notice that examples were designed to run inside your IDE.
+
+
+## Test
+
+```shell
+cd spring-boot-responder
+gradle bootRun
+```
+
+```shell
+cd spring-boot-requester
+gradle bootRun
+```
+
+```shell
+curl http://localhost:8080/customers/1
+curl http://localhost:8080/customers
+curl http://localhost:8080/customers-channel
+```

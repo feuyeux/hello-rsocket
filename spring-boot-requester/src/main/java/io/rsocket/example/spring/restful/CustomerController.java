@@ -50,5 +50,4 @@ public class CustomerController {
             .mapToObj(n -> UUID.randomUUID().toString())
             .collect(toList());
     }
-
 }
