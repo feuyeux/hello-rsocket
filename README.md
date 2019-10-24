@@ -1,4 +1,6 @@
 # Hello RSocket
+
+### Java version
 > Fork from [https://github.com/b3rnoulli/rsocket-examples.git](https://github.com/b3rnoulli/rsocket-examples.git)
 
 - Add, refactor, and fix some implementations for learning and breakpoints.
@@ -50,4 +52,18 @@ gradle bootRun
 curl http://localhost:8080/customers/1
 curl http://localhost:8080/customers
 curl http://localhost:8080/customers-channel
+```
+
+### Golang version
+
+```
+▶ cd golang
+
+▶ go run main.go
+2019/10/24 18:30:42 ====ExecRequestResponse====
+2019/10/24 18:30:42 data: 你好 metadata: 世界
+2019/10/24 18:30:42 response: FramePayload{FrameHeader{id=1,type=PAYLOAD,flag=N|CL|M},data=你好,metadata=世界}
+2019/10/24 18:30:42 data: 你好
+2019/10/24 18:30:42 ====ExecFireAndForget====
+2019/10/24 18:30:42 GOT FNF: FrameFNF{FrameHeader{id=1,type=REQUEST_FNF,flag=M},data=hello,metadata=bonjour}
 ```
