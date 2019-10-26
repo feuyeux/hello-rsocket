@@ -24,5 +24,5 @@ func ExecRequestStream() {
 	defer cli.Close()
 
 	f := cli.RequestStream(payload.NewString("你好", "世界"))
-	PrintFlux(f)
+	PrintFlux(f, "[Request-Stream]")
 }

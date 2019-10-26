@@ -19,15 +19,15 @@ import (
 func Response() rsocket.RSocket {
 	return rsocket.NewAbstractSocket(
 		rsocket.MetadataPush(func(item payload.Payload) {
-			log.Println("GOT METADATA_PUSH:", item)
+			log.Println("[Responder::MetadataPush] GOT METADATA_PUSH:", item)
 		}),
 		rsocket.FireAndForget(func(elem payload.Payload) {
-			log.Println("GOT FNF:", elem)
+			log.Println("[Responder::FireAndForget] GOT FNF:", elem)
 		}),
 		rsocket.RequestResponse(func(pl payload.Payload) mono.Mono {
 			s := pl.DataUTF8()
 			m, _ := pl.MetadataUTF8()
-			log.Println("data:", s, "metadata:", m)
+			log.Println("[Responder::RequestResponse] data:", s, "metadata:", m)
 			return mono.Just(pl)
 
 			// Graceful with context API.
@@ -65,8 +65,8 @@ func Response() rsocket.RSocket {
 			//}
 			s := pl.DataUTF8()
 			m, _ := pl.MetadataUTF8()
-			log.Println("data:", s, "metadata:", m)
-			totals := 10
+			log.Println("[Responder::RequestStream] data:", s, "metadata:", m)
+			totals := 5
 			if n, err := strconv.Atoi(m); err == nil {
 				totals = n
 			}
@@ -75,7 +75,7 @@ func Response() rsocket.RSocket {
 					// You can use context for graceful coroutine shutdown, stop produce.
 					select {
 					case <-ctx.Done():
-						log.Println("ctx done:", ctx.Err())
+						log.Println("[Responder::RequestStream] ctx done:", ctx.Err())
 						return
 					default:
 						//time.Sleep(10 * time.Millisecond)
@@ -91,7 +91,7 @@ func Response() rsocket.RSocket {
 				//LimitRate(1).
 				SubscribeOn(scheduler.Elastic()).
 				DoOnNext(func(elem payload.Payload) {
-					log.Println("receiving:", elem)
+					log.Println("[Responder::RequestChannel] receiving:", elem)
 				}).
 				Subscribe(context.Background())
 			return flux.Create(func(i context.Context, sink flux.Sink) {

@@ -27,6 +27,6 @@ func ExecRequestResponse() {
 	if err != nil {
 		panic(err)
 	}
-	log.Println("response:", result)
-	log.Println("data:", result.DataUTF8())
+	log.Println("[Request-Response] response:", result)
+	log.Println("[Request-Response] data:", result.DataUTF8())
 }
