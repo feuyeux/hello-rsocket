@@ -37,3 +37,6 @@ gradle-app.setting
 .project
 
 go.sum
+
+Cargo.lock
+target/
