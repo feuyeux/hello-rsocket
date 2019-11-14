@@ -1,14 +1,8 @@
-extern crate futures as f;
-extern crate rsocket_rust;
-extern crate tokio;
-
-use core::marker;
-use std::io::Bytes;
-
+use bytes::Bytes;
 use rsocket_rust::prelude::{Payload, RSocket, RSocketError};
-use tokio::prelude::stream::IterOk;
-use self::f::future::ok;
-use self::f::{TryFutureExt, Future, Stream};
+use tokio::prelude::stream::*;
+use futures::future::ok;
+use futures::{ Future, Stream};
 
 pub struct Response;
 
@@ -42,12 +36,5 @@ impl RSocket for Response {
             results.push(pa);
         }
         Box::new(iter_ok(results))
-    }
-}
-
-fn iter_ok<I, E>(i: I) -> IterOk<I::IntoIter, E> where I: IntoIterator {
-    IterOk {
-        iter: i.into_iter(),
-        _marker: marker::PhantomData,
     }
 }
