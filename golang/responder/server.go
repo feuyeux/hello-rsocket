@@ -25,8 +25,7 @@ func Start() {
 					return nil, errors.New("bye bye bye")
 				}
 				return Response(), nil
-			}
-			).
+			}).
 		Transport("tcp://127.0.0.1:7878").
 		Serve(context.Background())
 	panic(err)
