@@ -15,16 +15,18 @@ func Start() {
 	err := rsocket.Receive().
 		Resume().
 		Fragment(1024).
-		Acceptor(func(setup payload.SetupPayload, sendingSocket rsocket.CloseableRSocket) (rsocket.RSocket, error) {
-			sendingSocket.OnClose(func(err error) {
-				log.Println("***** socket disconnected *****")
-			})
-			// For SETUP_REJECT testing.
-			if strings.EqualFold(setup.DataUTF8(), "REJECT_ME") {
-				return nil, errors.New("bye bye bye")
+		Acceptor(
+			func(setup payload.SetupPayload, sendingSocket rsocket.CloseableRSocket) (rsocket.RSocket, error) {
+				sendingSocket.OnClose(func(err error) {
+					log.Println("***** socket disconnected *****")
+				})
+				// For SETUP_REJECT testing.
+				if strings.EqualFold(setup.DataUTF8(), "REJECT_ME") {
+					return nil, errors.New("bye bye bye")
+				}
+				return Response(), nil
 			}
-			return Response(), nil
-		}).
+			).
 		Transport("tcp://127.0.0.1:7878").
 		Serve(context.Background())
 	panic(err)

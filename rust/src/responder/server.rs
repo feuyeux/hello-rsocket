@@ -1,32 +1,24 @@
-extern crate bytes;
-extern crate futures;
 extern crate rsocket_rust;
+extern crate tokio;
 
-use bytes::Bytes;
-use futures::prelude::*;
+use crate::responder::rsocket_acceptor::Response;
 use rsocket_rust::prelude::*;
+use std::boxed::*;
+use bytes::Bytes;
 
-#[test]
-fn test_serve() {
-  RSocketFactory::receive()
-    .transport(URI::Tcp("127.0.0.1:7878"))
+pub fn start() {
+  let server = RSocketFactory::receive()
     .acceptor(|setup, sending_socket| {
-      println!("accept setup: {:?}", setup);
-      // TODO: use tokio runtime?
-      std::thread::spawn(move || {
         let resp = sending_socket
           .request_response(
             Payload::builder()
               .set_data(Bytes::from("Hello Client!"))
               .build(),
-          )
-          .wait()
-          .unwrap();
-        println!(">>>>> response success: {:?}", resp);
-      });
-      Box::new(MockResponder)
+          );
+          print!("{:?}",resp);
+          Box::new(Response);
     })
-    .serve()
-    .wait()
-    .unwrap();
+    .transport(URI::Tcp("127.0.0.1:7979"))
+    .serve();
+  tokio::run(server);
 }
