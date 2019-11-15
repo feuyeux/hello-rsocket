@@ -6,15 +6,20 @@ mod responder;
 
 fn main() {
     thread::spawn(|| {
-        responder::server::start();
-        thread::sleep(Duration::from_millis(1));
+        let _ = responder::server::start();
     });
 
     let sleep_millis = Duration::from_millis(5);
 
     thread::sleep(sleep_millis);
     requester::fire_and_forget::exec_fire_and_forget();
+
+    thread::sleep(sleep_millis);
     requester::request_channel::exec_request_channel();
+
+    thread::sleep(sleep_millis);
     requester::request_response::exec_request_response();
+
+    thread::sleep(sleep_millis);
     requester::request_stream::exec_request_stream();
 }
