@@ -2,7 +2,7 @@ use futures::prelude::*;
 use rsocket_rust::prelude::*;
 
 use crate::requester::client;
-pub fn exec_fire_and_forget(){
+pub fn exec_fire_and_forget() {
     println!("====ExecFireAndForget====");
 
     let cli = client::build_client();

@@ -1,8 +1,7 @@
+use hello_rsocket::requester;
+use hello_rsocket::responder;
 use std::thread;
 use std::time::Duration;
-
-mod requester;
-mod responder;
 
 fn main() {
     thread::spawn(|| {

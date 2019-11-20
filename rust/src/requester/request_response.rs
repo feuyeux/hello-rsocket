@@ -18,4 +18,3 @@ pub fn exec_request_response() {
 
     let _ = cli.on_close();
 }
-
