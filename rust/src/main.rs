@@ -2,23 +2,23 @@ use hello_rsocket::requester;
 use hello_rsocket::responder;
 use std::thread;
 use std::time::Duration;
-
+use requester::rsocket_requester::Requester;
 fn main() {
     thread::spawn(|| {
-        let _ = responder::server::start();
+        let _ = responder::start();
     });
 
     let sleep_millis = Duration::from_millis(5);
 
     thread::sleep(sleep_millis);
-    requester::fire_and_forget::exec_fire_and_forget();
+    Requester::fire_and_forget();
 
     thread::sleep(sleep_millis);
-    requester::request_channel::exec_request_channel();
+    Requester::request_channel();
 
     thread::sleep(sleep_millis);
-    requester::request_response::exec_request_response();
+    Requester::request_response();
 
     thread::sleep(sleep_millis);
-    requester::request_stream::exec_request_stream();
+    Requester::request_stream();
 }
