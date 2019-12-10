@@ -10,7 +10,6 @@ import (
 	"github.com/rsocket/rsocket-go/payload"
 )
 
-// Start rsocket server
 func Start() {
 	err := rsocket.Receive().
 		Resume().
@@ -24,7 +23,7 @@ func Start() {
 				if strings.EqualFold(setup.DataUTF8(), "REJECT_ME") {
 					return nil, errors.New("bye bye bye")
 				}
-				return Response(), nil
+				return RSocketAcceptor(), nil
 			}).
 		Transport("tcp://127.0.0.1:7878").
 		Serve(context.Background())

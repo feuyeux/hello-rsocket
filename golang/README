@@ -1,8 +1,0 @@
-main.go
-
-```go
-requester.ExecRequestResponse()
-requester.ExecFireAndForget()
-requester.ExecRequestStream()
-requester.ExecRequestChannel()
-```

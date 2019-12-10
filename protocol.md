@@ -15,8 +15,6 @@ Metadata Length: (24 bits = max value 16,777,215)
 Metadata Payload
 Payload of Frame
 
-
-
 #### Frame Types
 
 | Type                                                         | Value | Description                                                  |
