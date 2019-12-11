@@ -3,7 +3,6 @@ package requester
 import (
 	"context"
 	"github.com/rsocket/rsocket-go"
-	"github.com/rsocket/rsocket-go/payload"
 )
 
 func BuildClient() (rsocket.Client, error) {

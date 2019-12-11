@@ -20,5 +20,5 @@ func main() {
 	time.Sleep(200 * time.Millisecond)
 
 	go requester.ExecRequestChannel()
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 }
