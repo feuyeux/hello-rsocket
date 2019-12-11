@@ -99,7 +99,7 @@ curl http://localhost:8080/hello-forget
 |  gradle    |   4.10   |  5.6.2    |
 | `com.google.protobuf` | 0.8.8 | 0.8.10 |
 | `com.google.protobuf:protoc` | 3.6.1 | 3.10.0 |
-| `org.springframework.boot` | 2.2.0.M3 | 2.2.0.RC1 |
+| `org.springframework.boot` | 2.2.0.M3 | 2.2.1.RELEASE |
 
 #### Introduction
 
@@ -127,12 +127,12 @@ Please notice that examples were designed to run inside your IDE.
 #### Test
 
 ```shell
-cd spring-boot-responder
+cd java0/spring-boot-responder
 gradle bootRun
 ```
 
 ```shell
-cd spring-boot-requester
+cd java0/spring-boot-requester
 gradle bootRun
 ```
 
