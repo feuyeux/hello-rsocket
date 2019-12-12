@@ -1,22 +1,19 @@
-use rsocket_rust::prelude::*;
-use futures::future;
-use futures::{SinkExt, StreamExt};
 use tokio::sync::mpsc;
-use rsocket_rust::prelude::{Payload, Mono, RSocketError, Flux, RSocketResult, RSocket};
-use bytes::Bytes;
 use std::error::Error;
+use futures::prelude::*;
+use rsocket_rust::prelude::*;
 
 pub async fn start() -> Result<(), Box<dyn Error>> {
     RSocketFactory::receive()
         .transport(URI::Tcp("127.0.0.1:7878".to_string()))
-        .acceptor(|_setup, _sending_socket| Box::new(Response))
+        .acceptor(|_setup, _sending_socket| Box::new(ResponseCoon))
         .serve()
         .await
 }
 
-pub struct Response;
+pub struct ResponseCoon;
 
-impl RSocket for Response {
+impl RSocket for ResponseCoon {
     fn metadata_push(&self, req: Payload) -> Mono<()> {
         println!(">>>>>>>> metadata_push: {:?}", req);
         Box::pin(future::ok::<(), RSocketError>(()))
@@ -38,15 +35,21 @@ impl RSocket for Response {
 
     fn request_stream(&self, req: Payload) -> Flux<Payload> {
         println!(">>>>>>>> request_stream: {:?}", req);
-        let mut results = vec![];
-        for n in 0..3 {
-            let p = Payload::builder()
-                .set_data(Bytes::from(format!("DATA_{}", n)))
-                .set_metadata(Bytes::from(format!("METADATA_{}", n)))
-                .build();
-            results.push(p);
-        }
-        Box::pin(futures::stream::iter(results))
+//        let mut results = vec![];
+//        for n in 0..3 {
+//            let p = Payload::builder()
+//                .set_data(Bytes::from(format!("DATA_{}", n)))
+//                .set_metadata(Bytes::from(format!("METADATA_{}", n)))
+//                .build();
+//            results.push(p);
+//        }
+//        Box::pin(futures::stream::iter(results))
+
+        Box::pin(futures::stream::iter(vec![
+            Ok(req.clone()),
+            Ok(req.clone()),
+            Ok(req),
+        ]))
     }
 
     fn request_channel(&self, mut reqs: Flux<Payload>) -> Flux<Payload> {

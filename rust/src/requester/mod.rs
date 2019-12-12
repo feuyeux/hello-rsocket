@@ -1,16 +1,18 @@
 use futures::prelude::*;
 use rsocket_rust::prelude::*;
-use crate::responder::Response;
+use crate::responder::ResponseCoon;
+//use crate::responder::ResponseCoon;
 
-pub struct Requester {
+pub struct RequestCoon {
     pub client:  Client
 }
 
-impl Requester {
-    pub async fn new() -> Requester {
-        Requester {
+impl RequestCoon {
+    pub async fn new() -> RequestCoon {
+        RequestCoon {
             client: RSocketFactory::connect()
-                .acceptor(|| Box::new(Response))
+                //.acceptor(|| Box::new(responder::ResponseCoon))
+                .acceptor(|| Box::new(ResponseCoon))
                 .transport(URI::Tcp("127.0.0.1:7878".to_string()))
                 .setup(Payload::from("READY!"))
                 .mime_type("text/plain", "text/plain")

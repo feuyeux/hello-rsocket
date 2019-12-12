@@ -1,27 +1,27 @@
-use hello_rsocket::requester;
-use hello_rsocket::responder;
+//use crate::{responder, requester};
 use std::thread;
 use std::time::Duration;
-use requester::Requester;
+use hello_rsocket::{responder, requester};
+use std::error::Error;
 
-fn main() {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
     let sleep_millis = Duration::from_millis(5);
 
-    thread::spawn(|| {
-        let _ = responder::start();
-    });
-
-    let requester = Requester::new();
-
     thread::sleep(sleep_millis);
-    requester.fnf_push();
+    let request_coon = requester::RequestCoon::new().await;
 
+    request_coon.fnf_push().await;
     thread::sleep(sleep_millis);
-    requester.request_response();
 
+    request_coon.request_response().await;
     thread::sleep(sleep_millis);
-    requester.request_stream();
 
+    request_coon.request_stream().await;
     thread::sleep(sleep_millis);
-    requester.request_channel();
+
+    //futures do nothing unless you `.await` or poll them
+    request_coon.request_channel().await;
+
+    responder::start().await
 }
