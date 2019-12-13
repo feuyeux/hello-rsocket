@@ -6,7 +6,9 @@ use rsocket_rust::prelude::*;
 pub async fn start() -> Result<(), Box<dyn Error>> {
     RSocketFactory::receive()
         .transport(URI::Tcp("127.0.0.1:7878".to_string()))
-        .acceptor(|_setup, _sending_socket| Box::new(ResponseCoon))
+        .acceptor(|_setup, _sending_socket| {
+            Box::new(ResponseCoon)
+        })
         .serve()
         .await
 }
