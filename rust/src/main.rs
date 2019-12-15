@@ -11,7 +11,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
     thread::sleep(sleep_millis);
     let request_coon = requester::RequestCoon::new().await;
 
-    request_coon.fnf_push().await;
+    request_coon.fnf().await;
+    request_coon.meta_push().await;
     thread::sleep(sleep_millis);
 
     request_coon.request_response().await;

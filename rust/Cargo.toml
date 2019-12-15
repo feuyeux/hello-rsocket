@@ -1,13 +1,19 @@
 [package]
-name = "hello-rsocket"
+name = "hello_rsocket"
 version = "0.1.0"
 authors = ["feuyeux <feuyeux@gmail.com>"]
 edition = "2018"
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/feuyeux/hello-rsocket-rust"
+homepage = "https://github.com/feuyeux/hello-rsocket-rust"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rsocket_rust = "0.3.0"
+# Compiling rsocket_rust v0.4.0 (https://github.com/rsocket/rsocket-rust?branch=develop#8e7d276a)
+rsocket_rust =  { git = "https://github.com/rsocket/rsocket-rust", branch = "develop" }
+#rsocket_rust = "0.4.0"
 bytes = "0.5.2"
 futures = "0.3.1"
-tokio =  "0.2.2"
+tokio =  "0.2.4"

@@ -5,9 +5,9 @@ use rsocket_rust::prelude::*;
 
 pub async fn start() -> Result<(), Box<dyn Error>> {
     RSocketFactory::receive()
-        .transport(URI::Tcp("127.0.0.1:7878".to_string()))
-        .acceptor(|_setup, _sending_socket| {
-            Box::new(ResponseCoon)
+        .transport("tcp://127.0.0.1:7878")
+        .acceptor(|_setup, _socket| {
+            Ok(Box::new(ResponseCoon))
         })
         .serve()
         .await
@@ -18,15 +18,15 @@ pub struct ResponseCoon;
 impl RSocket for ResponseCoon {
     fn metadata_push(&self, req: Payload) -> Mono<()> {
         println!(">>>>>>>> metadata_push: {:?}", req);
-        Box::pin(future::ok::<(), RSocketError>(()))
+        Box::pin(async {})
     }
 
     fn fire_and_forget(&self, req: Payload) -> Mono<()> {
         println!(">>>>>>>> fire_and_forget: {:?}", req);
-        Box::pin(future::ok::<(), RSocketError>(()))
+        Box::pin(async {})
     }
 
-    fn request_response(&self, req: Payload) -> Mono<Payload> {
+    fn request_response(&self, req: Payload) -> Mono<Result<Payload, RSocketError>>  {
         println!(
             ">>>>>>>> request_response: data={:?},meta={:?}",
             req.data(),
@@ -46,21 +46,15 @@ impl RSocket for ResponseCoon {
 //            results.push(p);
 //        }
 //        Box::pin(futures::stream::iter(results))
-
-        Box::pin(futures::stream::iter(vec![
-            Ok(req.clone()),
-            Ok(req.clone()),
-            Ok(req),
-        ]))
+        Box::pin(futures::stream::iter(vec![req.clone(), req.clone(), req]))
     }
 
     fn request_channel(&self, mut reqs: Flux<Payload>) -> Flux<Payload> {
-        let (sender, receiver) = mpsc::unbounded_channel::<RSocketResult<Payload>>();
+        let (sender, receiver) = mpsc::unbounded_channel::<Payload>();
         tokio::spawn(async move {
-            while let Some(it) = reqs.next().await {
-                let pa = it.unwrap();
-                println!("{:?}", pa);
-                sender.send(Ok(pa)).unwrap();
+            while let Some(p) = reqs.next().await {
+                println!("{:?}", p);
+                sender.send(p).unwrap();
             }
         });
         Box::pin(receiver)
