@@ -57,3 +57,6 @@ curl http://localhost:8080/customers-channel
 - hello-rsocket-java https://github.com/feuyeux/hello-rsocket-java
 - hello-rsocket-golang https://github.com/feuyeux/hello-rsocket-golang
 - hello-rsocket-rust https://github.com/feuyeux/hello-rsocket-rust
+
+![](doc/hello-rsocket.png)
+
