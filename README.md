@@ -1,94 +1,5 @@
 # Hello RSocket
 
-### 1 Java version
-
-#### pojo
-```bash
-▶ cd pojo
-▶ mvn clean install
-```
-#### responder
-```bash
-▶ cd responder
-▶ mvn spring-boot:run
-```
-#### requester
-```bash
-▶ cd requester
-▶ mvn spring-boot:run
-```
-
-#### curl
-```bash
-curl http://localhost:8080/hello/1
-curl http://localhost:8080/hello-stream
-curl http://localhost:8080/hello-channel
-curl http://localhost:8080/hello-forget
-```
-
-### 2 Golang version
-
-```bash
-▶ cd golang
-
-▶ go run main.go
-2019/12/09 17:29:22 ====ExecRequestResponse====
-2019/12/09 17:29:22 [Responder::RequestResponse] data: {1} , metadata: 2019-12-09 5:29:220 pm
-2019/12/09 17:29:22 [Request-Response] response id: 1 ,name: Bonjour
-
-2019/12/09 17:29:22 ====ExecFireAndForget====
-2019/12/09 17:29:22 [Responder::FireAndForget] GOT FNF: 1
-
-2019/12/09 17:29:22 ====ExecRequestStream====
-2019/12/09 17:29:22 [Responder::RequestStream] data: {[1 2 2 4 1]} , metadata: 2019-12-09 5:29:220 pm
-2019/12/09 17:29:22 [Request-Stream] response: {1 Bonjour}
-2019/12/09 17:29:23 [Request-Stream] response: {2 Hola}
-2019/12/09 17:29:23 [Request-Stream] response: {2 Hola}
-2019/12/09 17:29:24 [Request-Stream] response: {4 Ciao}
-2019/12/09 17:29:24 [Request-Stream] response: {1 Bonjour}
-
-2019/12/09 17:29:25 ====ExecRequestChannel====
-2019/12/09 17:29:25 [Responder::RequestChannel] data: {3} , metadata: 2019-12-09 5:29:250 pm
-2019/12/09 17:29:25 [Request-Channel] response: {3 こんにちは}
-2019/12/09 17:29:25 [Responder::RequestChannel] data: {0} , metadata: 2019-12-09 5:29:250 pm
-2019/12/09 17:29:25 [Request-Channel] response: {0 Hello}
-2019/12/09 17:29:25 [Responder::RequestChannel] data: {0} , metadata: 2019-12-09 5:29:250 pm
-2019/12/09 17:29:25 [Request-Channel] response: {0 Hello}
-2019/12/09 17:29:25 [Responder::RequestChannel] data: {1} , metadata: 2019-12-09 5:29:250 pm
-2019/12/09 17:29:25 [Request-Channel] response: {1 Bonjour}
-2019/12/09 17:29:25 [Responder::RequestChannel] data: {0} , metadata: 2019-12-09 5:29:250 pm
-2019/12/09 17:29:25 [Request-Channel] response: {0 Hello}
-```
-
-### 3 Rust version
-
-```bash
-▶ cd rust 
-
-▶ cargo run
-    Finished dev [unoptimized + debuginfo] target(s) in 0.05s
-     Running `target/debug/hello-rsocket`
-====ExecFireAndForget====
->>>>>>>> fire_and_forget: Payload { m: None, d: Some(b"Mock FNF") }
->>>>>>>> metadata_push: Payload { m: Some(b"metadata only!"), d: None }
-====ExecRequestResponse====
->>>>>>>> request_response: data=Some(b"Hello World!"),meta=Some(b"#0")
-<<<<<<<< : Some(b"Hello World!")
->>>>>>>> request_response: data=Some(b"Hello World!"),meta=Some(b"#1")
-<<<<<<<< : Some(b"Hello World!")
->>>>>>>> request_response: data=Some(b"Hello World!"),meta=Some(b"#2")
-<<<<<<<< : Some(b"Hello World!")
-====ExecRequestStream====
->>>>>>>> request_stream: Payload { m: Some(b"foobar"), d: Some(b"Hello Rust!") }
-<<<<<<<< STREAM: Payload { m: Some(b"METADATA_0"), d: Some(b"DATA_0") }
-<<<<<<<< STREAM: Payload { m: Some(b"METADATA_1"), d: Some(b"DATA_1") }
-<<<<<<<< STREAM: Payload { m: Some(b"METADATA_2"), d: Some(b"DATA_2") }
-
-```
-
-### 4 NodeJs version
-
-### 5 Java 0 version
 > Fork from [https://github.com/b3rnoulli/rsocket-examples.git](https://github.com/b3rnoulli/rsocket-examples.git)
 
 - Add, refactor, and fix some implementations for learning and breakpoints.
@@ -141,3 +52,8 @@ curl http://localhost:8080/customers/1
 curl http://localhost:8080/customers
 curl http://localhost:8080/customers-channel
 ```
+
+## hello-rsocket series
+- hello-rsocket-java https://github.com/feuyeux/hello-rsocket-java
+- hello-rsocket-golang https://github.com/feuyeux/hello-rsocket-golang
+- hello-rsocket-rust https://github.com/feuyeux/hello-rsocket-rust
