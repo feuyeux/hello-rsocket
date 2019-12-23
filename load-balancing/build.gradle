@@ -10,9 +10,9 @@ repositories {
 
 dependencies {
 
-    compile 'io.rsocket:rsocket-core:0.12.1'
-    compile 'io.rsocket:rsocket-transport-netty:0.12.1'
-    compile 'io.rsocket:rsocket-load-balancer:0.12.1'
+    compile 'io.rsocket:rsocket-core:1.0.0-RC5'
+    compile 'io.rsocket:rsocket-transport-netty:1.0.0-RC5'
+    compile 'io.rsocket:rsocket-load-balancer:1.0.0-RC5'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     compile 'ch.qos.logback:logback-classic:1.2.3'

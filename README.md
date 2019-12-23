@@ -10,6 +10,7 @@
 |  gradle    |   4.10   |  5.6.2    |
 | `com.google.protobuf` | 0.8.8 | 0.8.10 |
 | `com.google.protobuf:protoc` | 3.6.1 | 3.10.0 |
+| `io.rsocket:rsocket-X` | 0.12.1 | 1.0.0-RC5 |
 | `org.springframework.boot` | 2.2.0.M3 | 2.2.1.RELEASE |
 
 #### Introduction
@@ -38,12 +39,12 @@ Please notice that examples were designed to run inside your IDE.
 #### Test
 
 ```shell
-cd java0/spring-boot-responder
+cd spring-boot-responder
 gradle bootRun
 ```
 
 ```shell
-cd java0/spring-boot-requester
+cd spring-boot-requester
 gradle bootRun
 ```
 

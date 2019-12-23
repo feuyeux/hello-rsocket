@@ -43,3 +43,6 @@ go.sum
 
 Cargo.lock
 target/
+/gradle/wrapper/
+/gradlew.bat
+/gradlew
